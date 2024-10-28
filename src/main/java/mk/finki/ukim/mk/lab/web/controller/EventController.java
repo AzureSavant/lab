@@ -18,13 +18,16 @@ import java.util.List;
 public class EventController {
     @Autowired
     private IEventService eventService;
-
+ //TODO: resolve issue with multiple search params ex. "summer 8.5"
     @GetMapping("/")
     public String Index(@RequestParam(required = false) String search, Model model){
         List<Event> events = eventService.listAll();
         if (search != null && !search.isEmpty()) {
             events = eventService.searchEventsByName(search);
-            events.addAll(eventService.searchEventsBypopularityScore(Double.parseDouble(search)));
+            try {
+                events.addAll(eventService.searchEventsBypopularityScore(Double.parseDouble(search)));
+            }
+            catch (Exception e){}
         }
         model.addAttribute("events", events);
         return "listEvents";

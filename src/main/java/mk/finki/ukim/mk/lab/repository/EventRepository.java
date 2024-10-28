@@ -29,10 +29,10 @@ public class EventRepository {
     }
 
     public List<Event> searchEvents(String text){
-        return eventList.stream().filter(e -> e.getName().contains(text) || e.getDescription().contains(text)).collect(Collectors.toList());
+        return eventList.stream().filter(e -> e.getName().toLowerCase().contains(text.toLowerCase()) || e.getDescription().toLowerCase().contains(text.toLowerCase())).collect(Collectors.toList());
     }
     public List<Event> searchEventsByName(String text) {
-        return eventList.stream().filter(e -> e.getName().contains(text) ).collect(Collectors.toList());
+        return eventList.stream().filter(e -> e.getName().toLowerCase().contains(text.toLowerCase()) ).collect(Collectors.toList());
     }
 
     public List<Event> searchEventsBypopularityScore(double score) {
