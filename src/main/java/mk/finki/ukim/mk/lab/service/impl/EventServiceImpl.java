@@ -34,4 +34,9 @@ public class EventServiceImpl implements IEventService {
     public List<Event> searchEventsBypopularityScore(double score) {
         return eventRepository.searchEventsBypopularityScore(score);
     }
+
+    @Override
+    public Event createEvent(Event event) {
+        return eventRepository.saveEvent(event);
+    }
 }

@@ -1,6 +1,7 @@
 package mk.finki.ukim.mk.lab.repository;
 
 import mk.finki.ukim.mk.lab.model.Event;
+import mk.finki.ukim.mk.lab.model.Location;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.stream.Collectors;
 @Repository
 public class EventRepository {
     public static List<Event> eventList;
-
+    public static LocationRepository locationRepository;
     public EventRepository() {
         eventList = new ArrayList<>(10);
         eventList.add(new Event("Summer Music Festival", "An annual festival featuring local bands and food vendors.", 8.5));
@@ -37,5 +38,12 @@ public class EventRepository {
 
     public List<Event> searchEventsBypopularityScore(double score) {
         return eventList.stream().filter(e-> e.getPopularityScore() >= score).collect(Collectors.toList());
+    }
+
+    public Event saveEvent(Event event) {
+        Location location = locationRepository.getLocationById(Math.toIntExact(event.getLocation().getId()));
+        event.setLocation(location);
+        eventList.add(event);
+        return event;
     }
 }

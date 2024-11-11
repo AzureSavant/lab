@@ -1,16 +1,13 @@
 package mk.finki.ukim.mk.lab.web.controller;
 
 import mk.finki.ukim.mk.lab.model.Event;
+import mk.finki.ukim.mk.lab.model.Location;
 import mk.finki.ukim.mk.lab.service.IEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -19,8 +16,8 @@ public class EventController {
     @Autowired
     private IEventService eventService;
  //TODO: resolve issue with multiple search params ex. "summer 8.5"
-    @GetMapping("/")
-    public String Index(@RequestParam(required = false) String search, Model model){
+    @GetMapping("/events")
+    public String getEventsPage(@RequestParam(required = false) String search, Model model){
         List<Event> events = eventService.listAll();
         if (search != null && !search.isEmpty()) {
             events = eventService.searchEventsByName(search);
@@ -38,5 +35,25 @@ public class EventController {
         model.addAttribute("event", event.orElse(null));
         model.addAttribute("numTickets", numTickets);
         return "bookingConfirmation";
+    }
+    @PostMapping("/save")
+    public String saveEvent(@RequestParam String name,
+                            @RequestParam String description,
+                            @RequestParam double popularityScore,
+                            @RequestParam String locationId){
+
+        Event event = new Event();
+        if(!name.isEmpty() && !description.isEmpty() && !locationId.isEmpty()){
+            event = new Event(name,description,popularityScore,new Location(Long.parseLong(locationId)));
+            Event result = eventService.createEvent(event);
+            if(result != null){
+                return "redirect:/events";
+            }
+        }
+        return "redirect:/error";
+    }
+    @GetMapping("/error")
+    public String errorPage(){
+        return "error";
     }
 }

@@ -11,18 +11,24 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Event {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
     protected String name;
     protected String description;
     protected double popularityScore;
     @OneToOne
     @JoinColumn(name = "location_id")
-    private Location location;
+    protected Location location;
 
     public Event(String name, String description, double popularityScore) {
         this.name = name;
         this.description = description;
         this.popularityScore = popularityScore;
+    }
+
+    public Event(String name, String description, double popularityScore, Location location) {
+        this.name = name;
+        this.description = description;
+        this.popularityScore = popularityScore;
+        this.location = location;
     }
 }
