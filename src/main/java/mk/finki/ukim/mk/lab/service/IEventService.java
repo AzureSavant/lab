@@ -9,4 +9,5 @@ public interface IEventService {
     List<Event> searchEvents(String text);
     List<Event> searchEventsByName(String text);
     List<Event> searchEventsBypopularityScore(double score);
+    Event createEvent(Event event);
 }
