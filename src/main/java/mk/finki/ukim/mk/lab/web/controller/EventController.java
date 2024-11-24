@@ -36,13 +36,13 @@ public class EventController {
         model.addAttribute("numTickets", numTickets);
         return "bookingConfirmation";
     }
-    @PostMapping("/save")
+    @PostMapping("/events/add")
     public String saveEvent(@RequestParam String name,
                             @RequestParam String description,
                             @RequestParam double popularityScore,
                             @RequestParam String locationId){
 
-        Event event = new Event();
+        Event event;
         if(!name.isEmpty() && !description.isEmpty() && !locationId.isEmpty()){
             event = new Event(name,description,popularityScore,new Location(Long.parseLong(locationId)));
             Event result = eventService.createEvent(event);
@@ -52,8 +52,21 @@ public class EventController {
         }
         return "redirect:/error";
     }
+    @PutMapping("/events/edit/{eventId}")
+    public String editEvent(@PathVariable Long eventId ,@RequestParam String name,
+                            @RequestParam String description,
+                            @RequestParam double popularityScore,
+                            @RequestParam String locationId){
+        Event requestEvent = new Event(name,description,popularityScore,new Location(Long.parseLong(locationId)));
+        Event result = eventService.editEvent(eventId, requestEvent);
+        if(result != null){
+            return "redirect:/events";
+        }
+        return  "redirect:/error";
+    }
+
     @GetMapping("/error")
     public String errorPage(){
-        return "error";
+        return "errorPage";
     }
 }

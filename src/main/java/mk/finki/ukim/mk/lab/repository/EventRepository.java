@@ -39,11 +39,24 @@ public class EventRepository {
     public List<Event> searchEventsBypopularityScore(double score) {
         return eventList.stream().filter(e-> e.getPopularityScore() >= score).collect(Collectors.toList());
     }
+    public Event getEventById(Long Id) {
+        return eventList.stream().filter(e-> e.getId().equals(Id)).findFirst().orElse(null);
+    }
 
     public Event saveEvent(Event event) {
-        Location location = locationRepository.getLocationById(Math.toIntExact(event.getLocation().getId()));
+        Location location = locationRepository.getLocationById(event.getLocation().getId());
         event.setLocation(location);
         eventList.add(event);
+        return event;
+    }
+    public Event editEvent(Event event) {
+        Event eventToEdit = getEventById(event.getId());
+        if(eventToEdit != null){
+            Location location = locationRepository.getLocationById(event.getLocation().getId());
+            event.setLocation(location);
+            eventList.remove(eventToEdit);
+            eventList.add(event);
+        }
         return event;
     }
 }

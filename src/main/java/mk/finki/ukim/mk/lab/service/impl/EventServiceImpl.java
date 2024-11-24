@@ -26,6 +26,11 @@ public class EventServiceImpl implements IEventService {
     }
 
     @Override
+    public Event getEventById(Long id) {
+        return eventRepository.getEventById(id);
+    }
+
+    @Override
     public List<Event> searchEventsByName(String text) {
         return eventRepository.searchEventsByName(text);
     }
@@ -38,5 +43,22 @@ public class EventServiceImpl implements IEventService {
     @Override
     public Event createEvent(Event event) {
         return eventRepository.saveEvent(event);
+    }
+
+    @Override
+    public Event editEvent(Long Id, Event requestEvent) {
+        Event originalEvent = getEventById(Id);
+        if(originalEvent != null){
+            originalEvent.setName( (!requestEvent.getName().isEmpty() && (requestEvent.getName() != null))
+                    ? requestEvent.getName() : originalEvent.getName());
+            originalEvent.setDescription( (!requestEvent.getDescription().isEmpty() && (requestEvent.getDescription() != null))
+                    ? requestEvent.getDescription() : originalEvent.getDescription());
+            originalEvent.setPopularityScore( (!Double.isNaN(requestEvent.getPopularityScore()))
+                    ? requestEvent.getPopularityScore() : originalEvent.getPopularityScore());
+            originalEvent.setLocation((requestEvent.getLocation().getId() != null)
+                    ? requestEvent.getLocation() : originalEvent.getLocation());
+            eventRepository.editEvent(originalEvent);
+        }
+        return originalEvent;
     }
 }
