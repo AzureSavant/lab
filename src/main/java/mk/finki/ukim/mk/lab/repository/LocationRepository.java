@@ -59,7 +59,12 @@ public class LocationRepository {
         return locationList;
     }
 
-    public  Location getLocationById(int id){
-        return locationList.stream().filter(location -> location.getId() == id).findFirst().orElse(null);
+    public  Location getLocationById(Long id){
+        return locationList.stream().filter(location -> location.getId().equals(id)).findFirst().orElse(null);
+    }
+    public  void AddLocation(Location location){
+        if(getLocationById(location.getId()) != null){
+            locationList.add(location);
+        }
     }
 }

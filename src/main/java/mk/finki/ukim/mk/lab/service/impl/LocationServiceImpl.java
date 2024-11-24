@@ -23,8 +23,13 @@ public class LocationServiceImpl implements ILocationService {
     }
 
     @Override
-    public Location getLocationById(int id) {
+    public Location getLocationById(Long id) {
         return locationRepository.getLocationById(id);
+    }
+
+    @Override
+    public void addLocation(Location location) {
+        locationRepository.AddLocation(location);
     }
 
 }

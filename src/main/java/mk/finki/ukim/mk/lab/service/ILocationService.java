@@ -5,6 +5,7 @@ import mk.finki.ukim.mk.lab.model.Location;
 import java.util.List;
 
 public interface ILocationService {
-    public List<Location> findAll();
-    public Location getLocationById(int id);
+    List<Location> findAll();
+    Location getLocationById(Long id);
+    void  addLocation(Location location);
 }
