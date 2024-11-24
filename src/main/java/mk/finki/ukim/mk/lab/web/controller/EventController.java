@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/events")
+@RequestMapping("/")
 public class EventController {
     @Autowired
     private IEventService eventService;
  //TODO: resolve issue with multiple search params ex. "summer 8.5"
-    @GetMapping("/")
+    @GetMapping("/events")
     public String getEventsPage(@RequestParam(required = false) String search, Model model){
         List<Event> events = eventService.listAll();
         if (search != null && !search.isEmpty()) {
@@ -36,7 +36,7 @@ public class EventController {
         model.addAttribute("numTickets", numTickets);
         return "bookingConfirmation";
     }
-    @PostMapping("/add")
+    @PostMapping("/events/add")
     public String saveEvent(@RequestParam String name,
                             @RequestParam String description,
                             @RequestParam double popularityScore,
@@ -52,7 +52,7 @@ public class EventController {
         }
         return "redirect:/error";
     }
-    @PutMapping("/edit/{eventId}")
+    @PutMapping("/events/edit/{eventId}")
     public String editEvent(@PathVariable Long eventId ,@RequestParam String name,
                             @RequestParam String description,
                             @RequestParam double popularityScore,
@@ -65,7 +65,7 @@ public class EventController {
         return  "redirect:/error";
     }
 
-    @DeleteMapping("/delete/{eventId}")
+    @DeleteMapping("/events/delete/{eventId}")
     public String deleteEvent(@PathVariable Long eventId ){
         Event result = eventService.deleteEvent(eventId);
         if(result != null){
