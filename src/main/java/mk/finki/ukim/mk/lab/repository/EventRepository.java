@@ -59,4 +59,14 @@ public class EventRepository {
         }
         return event;
     }
+
+    public Event deleteEvent(Long Id){
+        Event event = getEventById(Id);
+        int index = eventList.indexOf(event);
+
+        if( index != -1 && event != null){
+           return eventList.remove(index);
+        }
+        return  null;
+    }
 }

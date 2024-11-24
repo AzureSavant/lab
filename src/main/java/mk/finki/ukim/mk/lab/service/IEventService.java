@@ -12,4 +12,6 @@ public interface IEventService {
     List<Event> searchEventsBypopularityScore(double score);
     Event createEvent(Event event);
     Event editEvent(Long Id, Event requestEvent);
+
+    Event deleteEvent(Long eventId);
 }

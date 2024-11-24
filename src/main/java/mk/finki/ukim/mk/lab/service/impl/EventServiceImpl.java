@@ -61,4 +61,9 @@ public class EventServiceImpl implements IEventService {
         }
         return originalEvent;
     }
+
+    @Override
+    public Event deleteEvent(Long eventId) {
+        return eventRepository.deleteEvent(eventId);
+    }
 }

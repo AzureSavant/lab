@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/events")
 public class EventController {
     @Autowired
     private IEventService eventService;
  //TODO: resolve issue with multiple search params ex. "summer 8.5"
-    @GetMapping("/events")
+    @GetMapping("/")
     public String getEventsPage(@RequestParam(required = false) String search, Model model){
         List<Event> events = eventService.listAll();
         if (search != null && !search.isEmpty()) {
@@ -36,7 +36,7 @@ public class EventController {
         model.addAttribute("numTickets", numTickets);
         return "bookingConfirmation";
     }
-    @PostMapping("/events/add")
+    @PostMapping("/add")
     public String saveEvent(@RequestParam String name,
                             @RequestParam String description,
                             @RequestParam double popularityScore,
@@ -52,13 +52,22 @@ public class EventController {
         }
         return "redirect:/error";
     }
-    @PutMapping("/events/edit/{eventId}")
+    @PutMapping("/edit/{eventId}")
     public String editEvent(@PathVariable Long eventId ,@RequestParam String name,
                             @RequestParam String description,
                             @RequestParam double popularityScore,
                             @RequestParam String locationId){
         Event requestEvent = new Event(name,description,popularityScore,new Location(Long.parseLong(locationId)));
         Event result = eventService.editEvent(eventId, requestEvent);
+        if(result != null){
+            return "redirect:/events";
+        }
+        return  "redirect:/error";
+    }
+
+    @DeleteMapping("/delete/{eventId}")
+    public String deleteEvent(@PathVariable Long eventId ){
+        Event result = eventService.deleteEvent(eventId);
         if(result != null){
             return "redirect:/events";
         }
