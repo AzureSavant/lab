@@ -17,16 +17,16 @@ public class EventRepository {
         this.locationRepository = locationRepository;
 
         eventList = new ArrayList<>(10);
-        eventList.add(new Event("Summer Music Festival", "An annual festival featuring local bands and food vendors.", 8.5, this.locationRepository.getLocationById(1L)));
-        eventList.add(new Event("Tech Conference 2024", "A gathering of industry leaders to discuss the latest innovations in technology.", 9.2, this.locationRepository.getLocationById(1L)));
-        eventList.add(new Event("Art in the Park", "A community event showcasing local artists and their work.", 7.8, this.locationRepository.getLocationById(1L)));
-        eventList.add(new Event("Annual Charity Run", "A fun run to raise funds for local charities and promote fitness.", 8.0, this.locationRepository.getLocationById(1L)));
-        eventList.add(new Event("Winter Wonderland", "A festive celebration with ice skating, holiday markets, and light displays.", 9.0, this.locationRepository.getLocationById(1L)));
-        eventList.add(new Event("Farmers' Market", "A weekly market featuring fresh produce and handmade goods from local vendors.", 8.3, this.locationRepository.getLocationById(1L)));
-        eventList.add(new Event("Film Festival", "A week-long event showcasing independent films and documentaries.", 8.7, this.locationRepository.getLocationById(1L)));
-        eventList.add(new Event("Local Sports Day", "A day of friendly competitions and games for all ages.", 7.5, this.locationRepository.getLocationById(1L)));
-        eventList.add(new Event("Cultural Heritage Fair", "A celebration of diverse cultures with food, performances, and workshops.", 8.9, this.locationRepository.getLocationById(1L)));
-        eventList.add(new Event("Outdoor Adventure Expo", "An exhibition featuring outdoor gear, activities, and adventure travel opportunities.", 8.1, this.locationRepository.getLocationById(1L)));
+        eventList.add(new Event(1L,"Summer Music Festival", "An annual festival featuring local bands and food vendors.", 8.5, this.locationRepository.getLocationById(1L)));
+        eventList.add(new Event(2L,"Tech Conference 2024", "A gathering of industry leaders to discuss the latest innovations in technology.", 9.2, this.locationRepository.getLocationById(1L)));
+        eventList.add(new Event(3L,"Art in the Park", "A community event showcasing local artists and their work.", 7.8, this.locationRepository.getLocationById(1L)));
+        eventList.add(new Event(4L,"Annual Charity Run", "A fun run to raise funds for local charities and promote fitness.", 8.0, this.locationRepository.getLocationById(1L)));
+        eventList.add(new Event(5L,"Winter Wonderland", "A festive celebration with ice skating, holiday markets, and light displays.", 9.0, this.locationRepository.getLocationById(1L)));
+        eventList.add(new Event(6L,"Farmers' Market", "A weekly market featuring fresh produce and handmade goods from local vendors.", 8.3, this.locationRepository.getLocationById(1L)));
+        eventList.add(new Event(7L,"Film Festival", "A week-long event showcasing independent films and documentaries.", 8.7, this.locationRepository.getLocationById(1L)));
+        eventList.add(new Event(8L,"Local Sports Day", "A day of friendly competitions and games for all ages.", 7.5, this.locationRepository.getLocationById(1L)));
+        eventList.add(new Event(9L,"Cultural Heritage Fair", "A celebration of diverse cultures with food, performances, and workshops.", 8.9, this.locationRepository.getLocationById(1L)));
+        eventList.add(new Event(10L,"Outdoor Adventure Expo", "An exhibition featuring outdoor gear, activities, and adventure travel opportunities.", 8.1, this.locationRepository.getLocationById(1L)));
     }
 
     public List<Event> findAll() {
