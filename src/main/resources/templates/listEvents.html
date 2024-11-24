@@ -19,7 +19,6 @@
     <input type="submit" value="Search">
   </form>
     <h2>Choose an event:</h2>
-    <form action="/eventBooking" method="post">
       <div th:each="event : ${events}">
         <label>
           <input type="radio" name="selectedEvent" th:value="${event.name}" />
@@ -28,13 +27,32 @@
           Rating: <span th:text="${event.popularityScore}"></span>
           Location: <span th:text="${event.location.name}"></span>
         </label>
+        <form th:action="@{/events/delete/{eventId} (eventId=${event.getId()})}"
+              th:method="DELETE">
+          <button type="submit">
+            <i>Delete</i>
+          </button>
+        </form>
+        <form th:action="@{/events/edit/{eventId} (eventId=${event.getId()})}"
+              th:method="GET">
+          <button type="submit">
+            <i>Edit</i>
+          </button>
+        </form>
+
         <br />
       </div>
-
+    <form action="/eventBooking" method="post">
       <h2>Choose number of tickets:</h2>
       <input type="number" name="numTickets" min="1" max="10" required>
       <br/><br/>
       <input type="submit" value="Submit">
     </form>
+  <div class="col-sm-12 col-md-12">
+    <a href="/events/add-form" class="btn btn-block btn-dark add-product-btn">
+      Add new Event
+    </a>
+  </div>
+
 </body>
 </html>
