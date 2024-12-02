@@ -10,9 +10,9 @@ import java.util.List;
 @Repository
 public interface LocationRepository extends JpaRepository<Location,Long> {
 
-    List<Location> findAll();
+  /*  List<Location> findAll();
 
     Location getLocationById(Long id);
 
-    void AddLocation(Location location);
+    void AddLocation(Location location);*/
 }

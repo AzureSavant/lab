@@ -79,11 +79,10 @@ public class EventController {
 
     @PostMapping("/events/delete/{eventId}")
     public String deleteEvent(@PathVariable Long eventId){
-        Event result = eventService.deleteEvent(eventId);
-        if(result != null){
+        eventService.deleteEvent(eventId);
+
             return "redirect:/events";
-        }
-        return  "redirect:/error";
+
     }
 
     @GetMapping("/error")

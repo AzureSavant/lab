@@ -5,17 +5,16 @@ import mk.finki.ukim.mk.lab.model.EventBooking;
 import mk.finki.ukim.mk.lab.repository.EventRepository;
 import mk.finki.ukim.mk.lab.service.IEventBookingService;
 import mk.finki.ukim.mk.lab.service.IEventService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class EventBookingServiceImpl implements IEventBookingService {
-    private final EventRepository eventRepository;
 
-    public EventBookingServiceImpl(EventRepository eventRepository) {
-        this.eventRepository = eventRepository;
-    }
+
+
 
     //TODO Implement placeBoking Create EventBooking Repo, create AllBooking template to view all booked lists for User
 

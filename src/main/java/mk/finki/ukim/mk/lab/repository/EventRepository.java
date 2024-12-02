@@ -13,15 +13,23 @@ import java.util.stream.Collectors;
 public interface EventRepository extends JpaRepository<Event,Long> {
 
 
-     List<Event> findAll();
+    List<Event> findAllByNameContainsIgnoreCaseOrDescriptionContainsIgnoreCase(String name, String description);
+    List<Event> findAllByName(String text);
+    List<Event> findAllByPopularityScore(double score);
 
-    List<Event> searchEvents(String text);
-
-    List<Event> searchEventsByName(String name);
-
-    List<Event> searchEventsBypopularityScore(double score);
-     Event getEventById(Long Id);
-     Event saveEvent(Event event);
-     Event editEvent(Event event);
-     Event deleteEvent(Long Id);
+    //    List<Event> findAll();
+//
+//    List<Event> searchEvents(String text);
+//
+//    List<Event> searchEventsByName(String name);
+//
+//    List<Event> searchEventsBypopularityScore(double score);
+//
+//    Event getEventById(Long Id);
+//
+//    Event saveEvent(Event event);
+//
+//    Event editEvent(Event event);
+//
+//    Event deleteEvent(Long Id);
 }

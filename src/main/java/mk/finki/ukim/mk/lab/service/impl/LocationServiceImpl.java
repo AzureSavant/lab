@@ -7,15 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LocationServiceImpl implements ILocationService {
     @Autowired
-    private final LocationRepository locationRepository;
-
-    public LocationServiceImpl(LocationRepository locationRepository) {
-        this.locationRepository = locationRepository;
-    }
+    private LocationRepository locationRepository;
 
     @Override
     public List<Location> findAll() {
@@ -23,13 +20,13 @@ public class LocationServiceImpl implements ILocationService {
     }
 
     @Override
-    public Location getLocationById(Long id) {
-        return locationRepository.getLocationById(id);
+    public Optional<Location> getLocationById(Long id) {
+        return locationRepository.findById(id);
     }
 
     @Override
     public void addLocation(Location location) {
-        locationRepository.AddLocation(location);
+        locationRepository.save(location);
     }
 
 }
